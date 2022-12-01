@@ -32,7 +32,7 @@ export const upload = multer({
       cb(null, { fieldName: "image" });
     },
     key: (_req, file, cb) => {
-      // console.log(file, "test");
+      console.log(file, "test");
       cb(null, `${Date.now().toString()}.${file.originalname.split(".")[1]}`);
     },
   }),

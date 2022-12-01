@@ -7,12 +7,12 @@ export const imageupload = async (req: Request, res: Response) => {
   const Data = await studentbody.save();
   try {
     res.status(200).json({
-      message: "upload successfully",
+      message: "Image Uploaded",
       result: Data,
     });
   } catch (e) {
     res.status(404).json({
-      message: "upload failed",
+      message: "Failed",
     });
   }
 };
