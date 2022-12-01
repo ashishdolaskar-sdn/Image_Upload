@@ -5,7 +5,7 @@ import multerS3 from "multer-s3";
 // const s3: any = new aws.S3();
 // console.log("start");
 const s3config = new S3Client({
-  region: "ap-south-1",
+  region: process.env.AWS_BUCKET_REGION,
   credentials: {
     accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_KEY,
@@ -29,14 +29,13 @@ export const upload = multer({
   storage: multerS3({
     acl: "public-read",
     s3: s3config,
-    bucket: "todoprnlibucket",
+    bucket: <string>process.env.AWS_BUCKET_NAME,
     metadata: (_req, _file, cb) => {
       cb(null, { fieldName: "image" });
     },
-      key: (_req, file, cb) => {
-        console.log(file,"test");
-        
-      cb(null, Date.now().toString());
+    key: (_req, file, cb) => {
+      console.log(file, "test");
+      cb(null, `${Date.now().toString()}.${file.originalname.split(".")[1]}`);
     },
   }),
 });
