@@ -2,8 +2,7 @@ import aws from "aws-sdk";
 const { S3Client } = require("@aws-sdk/client-s3");
 import multer, { FileFilterCallback } from "multer";
 import multerS3 from "multer-s3";
-// const s3: any = new aws.S3();
-// console.log("start");
+
 const s3config = new S3Client({
   region: process.env.AWS_BUCKET_REGION,
   credentials: {
@@ -11,10 +10,6 @@ const s3config = new S3Client({
     secretAccessKey: process.env.AWS_SECRET_KEY,
   },
 });
-console.log("region:-", s3config.region);
-console.log("credentials:-", s3config.credentials);
-  
-
 const fileFilter = (
   req: Express.Request,
   file: Express.Multer.File,
@@ -37,8 +32,7 @@ export const upload = multer({
       cb(null, { fieldName: "image" });
     },
     key: (_req, file, cb) => {
-      console.log(file, "test");
-
+      // console.log(file, "test");
       cb(null, `${Date.now().toString()}.${file.originalname.split(".")[1]}`);
     },
   }),
