@@ -1,4 +1,5 @@
 import aws from "aws-sdk";
+import { DiffieHellmanGroup } from "crypto";
 const { S3Client } = require("@aws-sdk/client-s3");
 import multer, { FileFilterCallback } from "multer";
 import multerS3 from "multer-s3";
@@ -15,7 +16,7 @@ const fileFilter = (
   file: Express.Multer.File,
   cb: FileFilterCallback
 ) => {
-  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+  if ((file.mimetype).startsWith("image")) {
     cb(null, true);
   } else {
     cb(new Error());
@@ -29,7 +30,7 @@ export const upload = multer({
     s3: s3config,
     bucket: <string>process.env.AWS_BUCKET_NAME,
     metadata: (_req, _file, cb) => {
-      cb(null, { fieldName: "image" });
+      cb(null, { fieldName: "file" });
     },
     key: (_req, file, cb) => {
       console.log(file, "test");
