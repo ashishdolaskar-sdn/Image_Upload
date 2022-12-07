@@ -2,7 +2,6 @@ import image from "../model/image";
 import { Response, Request } from "express";
 import mongoose from "mongoose";
 export const imageupload = async (req: Request, res: Response) => {
-  console.log(req.file?.filename,"ksjdfkdlj")
   const studentbody = new image({
     image: req.file?.filename,
   });
@@ -10,12 +9,12 @@ export const imageupload = async (req: Request, res: Response) => {
   const Data = await studentbody.save();
   try {
     res.status(200).json({
-      message: "upload successfully",
+      message: "Image Uploaded",
       result: Data,
     });
   } catch (e) {
     res.status(404).json({
-      message: "upload failed",
+      message: "Failed",
     });
   }
 };
@@ -47,3 +46,4 @@ export const imageupload = async (req: Request, res: Response) => {
 //       res.send({ data });
 //   });
 // }
+
