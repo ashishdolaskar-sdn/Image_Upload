@@ -5,6 +5,6 @@ const userSchema = new mongoose.Schema({
     required: false,
   },
 });
-const image = mongoose.model("image", userSchema);
+const Image = mongoose.model("image", userSchema);
 
-export default image;
+export default Image;
