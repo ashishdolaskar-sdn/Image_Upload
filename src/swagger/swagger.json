@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8989/",
+      "url": "http://localhost:7979/",
       "description": "Our local server"
     }
   ],
@@ -153,6 +153,30 @@
           }
         }
       }
+    },
+    "/s3/s3image/": {
+      "post": {
+        "tags": ["Todo-List"],
+        "summary": " This is post api for upload image",
+        "description": "",
+        "operationId": "adding image",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/imageupload"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "success response"
+          }
+        }
+      }
     }
     
   },
@@ -187,6 +211,15 @@
           "todo": {
             "type": "string"
           }
+        }
+      },
+      "imageupload": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "string"
+          }
+         
         }
       }
     }
