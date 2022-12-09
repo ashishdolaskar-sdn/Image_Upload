@@ -1,8 +1,8 @@
 import Image from "../model/image";
 import { Response, Request } from "express";
-
 export const imageupload = async (req: Request, res: Response) => {
   const studentbody = new Image({
+    email: req.body.email,
     image: req.file?.filename,
   });
   const Data = await studentbody.save();
@@ -21,7 +21,8 @@ export const imageupload = async (req: Request, res: Response) => {
 
 export const getImage = async (req: Request, res: Response) => {
   try {
-    const result = await Image.find();
+    const result = await Image.find({ email: req.query.email });
+
     for (let key in result) {
       result[key].image = `http://localhost:7979/uploads/${result[key].image}`;
     }
