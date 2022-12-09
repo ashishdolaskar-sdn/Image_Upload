@@ -3,7 +3,6 @@ import { DiffieHellmanGroup } from "crypto";
 const { S3Client } = require("@aws-sdk/client-s3");
 import multer, { FileFilterCallback } from "multer";
 import multerS3 from "multer-s3";
-
 const s3config = new S3Client({
   region: process.env.AWS_BUCKET_REGION,
   credentials: {

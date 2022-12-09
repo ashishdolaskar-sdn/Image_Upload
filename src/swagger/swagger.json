@@ -2,34 +2,34 @@
   "openapi": "3.0.0",
   "info": {
     "version": "1.0.0",
-    "title": "Todo_List",
-    "description": "Todo_List using Microservice Architecture"
+    "title": "Image Upload",
+    "description": "Image Upload using Microservice Architecture"
   },
   "servers": [
     {
-      "url": "http://localhost:8989/",
+      "url": "http://localhost:7979/",
       "description": "Our local server"
     }
   ],
   "tags": [
     {
-      "name": "Todo-List",
-      "description": "Operations about User's TODO_LIST"
+      "name": "Image Upload",
+      "description": "Operations about User's Image Upload"
     }
   ],
   "paths": {
-    "/user/signup/": {
+    "/user/imageupload/": {
       "post": {
-        "tags": ["Todo-List"],
+        "tags": ["Media"],
         "summary": " This is post api for user registration",
         "description": "User registation using their name, contact number, email & password",
-        "operationId": "user_signup",
+        "operationId": "Image Upload",
         "requestBody": {
           "description": "",
           "content": {
-            "application/json": {
+             "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/UserType"
+                "$ref": "#/components/schemas/image"
               }
             }
           }
@@ -41,108 +41,12 @@
         }
       }
     },
-    "/user/login/": {
-      "post": {
-        "tags": ["Todo-List"],
-        "summary": " This is post api for user login",
-        "description": "",
-        "operationId": "user_login",
-        "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserType"
-              }
-            }
-          }
-        },
-
-        "responses": {
-          "200": {
-            "description": "success response"
-          }
-        }
-      }
-    },
-    "/user/add-task/": {
-      "post": {
-        "tags": ["Todo-List"],
-        "summary": " This is post api for add task",
-        "description": "",
-        "operationId": "adding task",
-        "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/todolist"
-              }
-            }
-          }
-        },
-
-        "responses": {
-          "200": {
-            "description": "success response"
-          }
-        }
-      }
-    },
-    "/user/update-task/": {
-      "put": {
-        "tags": ["Todo-List"],
-        "summary": " This is put api for update task",
-        "description": "",
-        "operationId": "update task",
-
-        "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/todolist"
-              }
-            }
-          }
-        },
-
-        "responses": {
-          "200": {
-            "description": " Response Success"
-          }
-        }
-      }
-    },
-    "/user/delete-task/": {
-      "delete": {
-        "tags": ["Todo-List"],
-        "summary": " This is delete api for update task",
-        "description": "",
-        "operationId": "Delete the task",
-        "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/todolist"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": " Response Success"
-          }
-        }
-      }
-    },
-    "/user/show-list/": {
+    "/user/get-image/": {
       "get": {
-        "tags": ["Todo-List"],
-        "summary": " This is get api for update task",
+        "tags": ["Getting Image"],
+        "summary": " This is get api forget image",
         "description": "",
-        "operationId": "Show all data",
+        "operationId": "Show Image",
 
         "responses": {
           "200": {
@@ -153,40 +57,50 @@
           }
         }
       }
+    },
+    "/s3/s3image/": {
+      "post": {
+        "tags": ["Todo-List"],
+        "summary": " This is post api for upload image",
+        "description": "",
+        "operationId": "adding image",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/imageupload"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "success response"
+          }
+        }
+      }
     }
-    
   },
   "components": {
     "schemas": {
-      "UserType": {
+      "image": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string"
-          },
-          "mobile": {
-            "type": "number"
-          },
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
+          "media": {
+            "type": "string",
+            "format": "base64"
           }
         }
       },
-      "todolist": {
+      "imageupload": {
         "type": "object",
         "properties": {
-          "_id": {
-            "type": "string"
-          },
-          "todoId": {
-            "type": "string"
-          },
-          "todo": {
+          "image": {
             "type": "string"
           }
+         
         }
       }
     }
